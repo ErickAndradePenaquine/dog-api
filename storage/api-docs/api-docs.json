@@ -1,0 +1,315 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Dogs",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "JSON"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "operationId": "2dd578ff7aba2721293dac66833b27d1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "email@email.com"
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "example": "senha"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login autorizado"
+                    },
+                    "401": {
+                        "description": "Login não autorizado"
+                    },
+                    "404": {
+                        "description": "Erro no login"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "operationId": "68a6108af04af5e3bc1ea68a6c6f1299",
+                "responses": {
+                    "200": {
+                        "description": "Logout feito"
+                    },
+                    "404": {
+                        "description": "Erro no logout"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/dogs": {
+            "get": {
+                "tags": [
+                    "Dogs"
+                ],
+                "summary": "Lista Dogs",
+                "operationId": "4030789aae9966496af44a9c6807a83f",
+                "responses": {
+                    "200": {
+                        "description": "Listar Dogs"
+                    },
+                    "401": {
+                        "description": "Requisição não autorizada"
+                    },
+                    "404": {
+                        "description": "Erro ao listar Dogs"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Dogs"
+                ],
+                "summary": "Criar um Dog",
+                "operationId": "36e1fe223331afc23356cd179288d280",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "raca",
+                                    "idade"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Rex"
+                                    },
+                                    "raca": {
+                                        "type": "string",
+                                        "example": "Labrador"
+                                    },
+                                    "idade": {
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Create Dog foi feito"
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    },
+                    "404": {
+                        "description": "Erro ao Criar"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/dogs/{id}": {
+            "get": {
+                "tags": [
+                    "Dogs"
+                ],
+                "summary": "Get em Dog especifico",
+                "operationId": "d8abb4347cc121868124a3c0abff744f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Dog",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get em Dog funcionou"
+                    },
+                    "404": {
+                        "description": "Dog não encontrado"
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Dogs"
+                ],
+                "summary": "Atualiza um Dog",
+                "operationId": "17a7b76313e8d7cc75deacad863eb3b1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Dog",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "raca",
+                                    "idade"
+                                ],
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Rex"
+                                    },
+                                    "raca": {
+                                        "type": "string",
+                                        "example": "Labrador"
+                                    },
+                                    "idade": {
+                                        "type": "integer",
+                                        "example": 3
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update de Dog feito"
+                    },
+                    "404": {
+                        "description": "Dog não encontrado"
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Dogs"
+                ],
+                "summary": "Delete Dog",
+                "operationId": "e1fb244c7a4c328d8580cc3e5ed64a17",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Dog",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dog deletado"
+                    },
+                    "404": {
+                        "description": "Dog não encontrado"
+                    },
+                    "401": {
+                        "description": "Não autorizado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Dogs",
+            "description": "Dogs"
+        }
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ]
+}
